@@ -1,0 +1,21 @@
+# Visual Studio
+.vs/
+build/
+Debug/
+Release/
+x64/
+*.exe
+*.pdb
+*.obj
+*.ilk
+*.log
+*.idb
+*.exp
+*.lib
+*.tlog
+*.lastbuildstate
+*.recipe
+*.user
+
+# 运行时生成的数据文件
+student.txt
