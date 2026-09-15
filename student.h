@@ -1,4 +1,4 @@
-//feature-test上的改动
+//feature-test涓婄殑鏀瑰姩
 #pragma once
 #include<string>
 #include<iostream>
@@ -36,7 +36,7 @@ public:
 	}
 
 	void print() const {
-		cout << "姓名:" << name << " " << "学号:" << id << " " << "成绩:" << score << endl;
+		cout << "濮撳悕:" << name << " " << "瀛﹀彿:" << id << " " << "鎴愮哗:" << score << endl;
 	}
 };
 

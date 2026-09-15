@@ -1,6 +1,3 @@
-//ÕâÊÇÔÚfeature-test·ÖÖ§ÉÏµÄ¸Ä¶¯
-//master·ÖÖ§ÉÏµÄ¸Ä¶¯
-//ÕâÊÇ´ÓÁíÒ»Ì¨µçÄÔÉÏ½øĞĞµÄĞŞ¸Ä
 #include<string>
 #include"menu.h"
 #include"studentservice.h"
@@ -8,8 +5,8 @@
 #include"studentrepository.h"
 
 void menu::showmainmenu() {
-	cout << "1.Ìí¼ÓÑ§Éú" << endl << "2.²éÕÒÑ§Éú" << endl << "3.É¾³ıÑ§Éú" << endl << "4.°´³É¼¨ÅÅĞò" << endl << "5.ÏÔÊ¾È«²¿Ñ§Éú" << endl << "6.ĞŞ¸ÄÑ§ÉúĞÅÏ¢" << endl << "7.±£´æ²¢ÍË³ö" <<endl;
-	cout << "ÇëÊäÈë²Ù×÷¶ÔÓ¦µÄÊı×Ö" << endl;
+	cout << "1.æ·»åŠ å­¦ç”Ÿ" << endl << "2.æŸ¥æ‰¾å­¦ç”Ÿ" << endl << "3.åˆ é™¤å­¦ç”Ÿ" << endl << "4.æŒ‰æˆç»©æ’åº" << endl << "5.æ˜¾ç¤ºå…¨éƒ¨å­¦ç”Ÿ" << endl << "6.ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯" << endl << "7.ä¿å­˜å¹¶é€€å‡º" <<endl;
+	cout << "è¯·è¾“å…¥æ“ä½œå¯¹åº”çš„æ•°å­—" << endl;
 }
 
 void menu::run() {
@@ -27,7 +24,7 @@ void menu::run() {
 		case 5:handleshowall(); break;
 		case 6:handleupdate(); break;
 		case 7:svc.saveall(); return;
-		default:cout << "ÇëÖØĞÂÊäÈë" << endl;
+		default:cout << "è¯·é‡æ–°è¾“å…¥" << endl;
 		}
 	}
 }
@@ -36,51 +33,50 @@ void menu::handleadd() {
 	string name;
 	string id;
 	double score;
-	cout << "ÇëÊäÈëĞÕÃû" << endl;
-	getline(cin, name);
-	cout << "ÇëÊäÈëÑ§ºÅ" << endl;
-	getline(cin, id);
-	score = getvalidscore();
-	if (svc.addstudent(student(name, id, score))) {
-		cout << "Ìí¼Ó³É¹¦" << endl;
-	}
-	else {
-		cout << "Ìí¼ÓÊ§°Ü" << endl;
+	
+	auto result=findsameid();
+	if (result) {
+		cout << "è¯·è¾“å…¥å§“å" << endl;
+		getline(cin, name);
+		score = getvalidscore();
+		if (svc.addstudent(student(name, id, score))) {
+			cout << "æ·»åŠ æˆåŠŸ" << endl;
+		}
 	}
 }
 
 void menu::handlefind() {
 	string id;
-	cout << "ÇëÊäÈëÑ§ºÅ" << endl;
+	cout << "è¯·è¾“å…¥å­¦å·" << endl;
 	getline(cin, id);
 
 	shared_ptr<student> result = svc.findbyid(id);
 
 	if (result == nullptr) {
-		cout << "Î´ÕÒµ½" << endl;
+		cout << "æœªæ‰¾åˆ°" << endl;
 	}
 	else {
-		cout << "ÕÒµ½ÁË" << endl;
+		cout << "æ‰¾åˆ°äº†" << endl;
 		result->print();
 	}
 }
 
 void menu::handledelete() {
 	string id;
-	cout << "ÇëÊäÈëÑ§ºÅ" << endl;
+	cout << "è¯·è¾“å…¥å­¦å·" << endl;
 	getline(cin, id);
 
 	if (svc.deletestudent(id)) {
-		cout << "ÒÑÉ¾³ı" << endl;
+		cout << "å·²åˆ é™¤" << endl;
 	}
 	else {
-		cout << "É¾³ıÊ§°Ü" << endl;
+		cout << "åˆ é™¤å¤±è´¥" << endl;
 	}
 }
 
 void menu::handlesort() {
 	auto all = svc.sortbyscore();
-	cout << "ÅÅĞòºóµÄ½á¹û:" << endl;
+	cout << "æ’åºåçš„ç»“æœ:" << endl;
 	for(const auto&a:all){
 		a->print();
 		cout << endl;
@@ -92,23 +88,23 @@ void menu::handleupdate() {
 	string name;
 	double score;
 	while (true) {
-		cout << "ÇëÊäÈëÒª¶ÔÆä½øĞĞ¸ü¸ÄµÄÑ§ºÅ" << endl;
+		cout << "è¯·è¾“å…¥è¦å¯¹å…¶è¿›è¡Œæ›´æ”¹çš„å­¦å·" << endl;
 		getline(cin, id);
 		auto find = svc.findbyid(id);
 		if (find) {
-			cout << "ÇëÊäÈëĞÂµÄĞÕÃû" << endl;
+			cout << "è¯·è¾“å…¥æ–°çš„å§“å" << endl;
 			getline(cin, name);
 			score = getvalidscore();
 			svc.updatestudent(name, id, score);
 			break;
 		}
 		else {
-			cout << "Î´ÕÒµ½¸ÃÑ§ºÅ£¬ÇëÖØĞÂÊäÈë" << endl;
+			cout << "æœªæ‰¾åˆ°è¯¥å­¦å·ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 		}
 	}
 	auto updated = svc.findbyid(id);
 	if (updated) {
-		cout << "ĞŞ¸ÄºóµÄĞÅÏ¢ÈçÏÂ£º" << endl;
+		cout << "ä¿®æ”¹åçš„ä¿¡æ¯å¦‚ä¸‹ï¼š" << endl;
 		updated->print();
 	}
 }
@@ -124,17 +120,33 @@ void menu::handleshowall() {
 double menu::getvalidscore() {
 	double score;
 		while (true) {
-			cout << "ÇëÊäÈë³É¼¨" << endl;
+			cout << "è¯·è¾“å…¥æˆç»©" << endl;
 			if (cin >> score && score >= 0 && score <= 100) {
 				cin.ignore(10000, '\n');
 				return score;
 			}
 			else {
-				cout << "ÊäÈëÎŞĞ§£¬ÇëÖØĞÂÊäÈë" << endl;
+				cout << "è¾“å…¥æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 				cin.clear();
 				cin.ignore(10000, '\n');
 			}
 
 		}
 
+}
+
+bool menu::findsameid() {
+	string id;
+	while (true) {
+		cout << "è¯·è¾“å…¥å­¦å·" << endl;
+		getline(cin, id);
+		auto find = svc.findbyid(id);
+		if (find) {
+			cout << "è¯¥å­¦å·å·²å­˜åœ¨" << endl;
+			continue;
+		}
+		else {
+			return true;
+		}
+	}
 }
