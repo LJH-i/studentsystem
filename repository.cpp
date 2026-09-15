@@ -4,7 +4,7 @@
 void repository::save(const map<string,shared_ptr<student>>& students) {
 	ofstream outfile(filename);
 	if (!outfile.is_open()) {
-		cerr << "文件无法打开" << endl;
+		cerr << "鏂囦欢鏃犳硶鎵撳紑" << endl;
 		return ;
 	}
 	else {
@@ -20,7 +20,7 @@ map<string,shared_ptr<student>>  repository::load() {
 	map<string,shared_ptr<student>> result;
 	ifstream infile(filename);
 	if (!infile.is_open()) {
-		cerr << "文件无法读取" << endl;
+		cerr << "鏂囦欢鏃犳硶璇诲彇" << endl;
 		return result;
 	}
 	else {
