@@ -18,6 +18,6 @@ public:
 	void handleshowall();
 
 	double getvalidscore();
-	bool findsameid();
+	string findsameid();
 
 };

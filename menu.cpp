@@ -35,14 +35,13 @@ void menu::handleadd() {
 	double score;
 	
 	auto result=findsameid();
-	if (result) {
 		cout << "请输入姓名" << endl;
 		getline(cin, name);
 		score = getvalidscore();
-		if (svc.addstudent(student(name, id, score))) {
+		if (svc.addstudent(student(name, result, score))) {
 			cout << "添加成功" << endl;
 		}
-	}
+	
 }
 
 void menu::handlefind() {
@@ -135,7 +134,7 @@ double menu::getvalidscore() {
 
 }
 
-bool menu::findsameid() {
+string menu::findsameid() {
 	string id;
 	while (true) {
 		cout << "请输入学号" << endl;
@@ -146,7 +145,7 @@ bool menu::findsameid() {
 			continue;
 		}
 		else {
-			return true;
+			return id;
 		}
 	}
 }
