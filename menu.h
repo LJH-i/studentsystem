@@ -19,5 +19,6 @@ public:
 
 	double getvalidscore();
 	string findsameid();
+	string getvalidid();
 
 };

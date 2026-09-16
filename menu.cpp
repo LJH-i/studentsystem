@@ -137,8 +137,7 @@ double menu::getvalidscore() {
 string menu::findsameid() {
 	string id;
 	while (true) {
-		cout << "请输入学号" << endl;
-		getline(cin, id);
+		id=getvalidid();
 		auto find = svc.findbyid(id);
 		if (find) {
 			cout << "该学号已存在" << endl;
@@ -146,6 +145,21 @@ string menu::findsameid() {
 		}
 		else {
 			return id;
+		}
+	}
+}
+
+string menu::getvalidid() {
+	string id;
+	while (true) {
+		cout << "请输入学号" << endl;
+		getline(cin, id);
+		if (id.size() == 3) {
+			return id;
+		}
+		else {
+			cout << "学号格式不正确，请重新输入" << endl;
+			continue;
 		}
 	}
 }
